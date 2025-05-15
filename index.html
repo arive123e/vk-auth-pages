@@ -3,22 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>VK ID Авторизация</title>
-  <script src="https://unpkg.com/@vkid/sdk@2.5.2/dist/sdk.umd.min.js"></script>
+  <script src="https://vk.com/js/id-sdk.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    #vkid-auth {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <h1>Войти через VK ID</h1>
-  <div id="vkid-container"></div>
+  <div id="vkid-auth"></div>
 
   <script>
-    VKID.Config.init({
-      clientId: 53336238,
-      redirectUri: 'https://arive123e.github.io/vk-auth-pages/callback.html',
-      state: 'test_state',
-    });
+    window.addEventListener('load', function () {
+      if (typeof VKIDSDK !== 'undefined') {
+        const config = new VKIDSDK.Config({
+          clientId: 53336238,
+          redirectUri: 'https://arive123e.github.io/vk-auth-pages/callback.html',
+        });
 
-    VKID.Auth.loginButton('vkid-container', {
-      showLogo: true,
-      showTitle: true,
+        const widget = new VKIDSDK.Widget(config);
+        widget.mount('vkid-auth');
+      } else {
+        console.error('VKID SDK не загружен.');
+      }
     });
   </script>
 </body>
