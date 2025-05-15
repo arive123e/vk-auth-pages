@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Обработка VK ID</title>
 </head>
 <body>
-  <h2>Авторизация через VK ID</h2>
+  <h1>Обработка VK ID</h1>
   <script>
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
+
     if (code) {
-      document.body.innerHTML += `<p>Код авторизации: <b>${code}</b></p>`;
+      console.log("Код авторизации:", code);
+      document.body.innerHTML += `<p>Код авторизации: ${code}</p>`;
     } else {
-      document.body.innerHTML += `<p style="color:red">Код авторизации не получен</p>`;
+      console.error("Код авторизации не получен");
+      document.body.innerHTML += "<p>Код авторизации не получен</p>";
     }
   </script>
 </body>
