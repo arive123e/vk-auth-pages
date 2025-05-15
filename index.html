@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <title>VK ID Авторизация</title>
-    <script src="https://cdn.jsdelivr.net/npm/@vkid/sdk@2.5.2/dist/sdk.min.js"></script>
-  </head>
-  <body>
-    <h2>Войти через VK ID</h2>
-    <div id="vk-id-container"></div>
+<head>
+  <meta charset="UTF-8">
+  <title>VK ID Авторизация</title>
+  <script src="https://unpkg.com/@vkid/sdk@2.5.2/dist/sdk.umd.min.js"></script>
+</head>
+<body>
+  <h1>Войти через VK ID</h1>
+  <div id="vkid-container"></div>
 
-    <script>
-      window.VKIDSDK
-        .Config.init({
-          app: 53336238,
-          redirectUrl: 'https://arive123e.github.io/vk-auth-pages/callback.html',
-        })
-        .then(() => {
-          VKIDSDK.Auth.loginButton({
-            container: 'vk-id-container',
-            lang: 'ru',
-            showAlternativeLogin: true,
-          });
-        })
-        .catch((err) => {
-          console.error('VKID SDK не загрузился:', err);
-        });
-    </script>
-  </body>
+  <script>
+    VKID.Config.init({
+      clientId: 53336238,
+      redirectUri: 'https://arive123e.github.io/vk-auth-pages/callback.html',
+      state: 'test_state',
+    });
+
+    VKID.Auth.loginButton('vkid-container', {
+      showLogo: true,
+      showTitle: true,
+    });
+  </script>
+</body>
 </html>
