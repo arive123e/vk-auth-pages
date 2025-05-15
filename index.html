@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>VK ID Авторизация</title>
-  <script src="https://vk.com/js/id-sdk.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,19 +19,21 @@
   <div id="vkid-auth"></div>
 
   <script>
-    window.addEventListener('load', function () {
-      if (typeof VKIDSDK !== 'undefined') {
-        const config = new VKIDSDK.Config({
-          clientId: 53336238,
-          redirectUri: 'https://arive123e.github.io/vk-auth-pages/callback.html',
-        });
-
-        const widget = new VKIDSDK.Widget(config);
-        widget.mount('vkid-auth');
-      } else {
-        console.error('VKID SDK не загружен.');
-      }
-    });
+    const sdk = document.createElement('script');
+    sdk.src = 'https://vk.com/js/id-sdk.js';
+    sdk.onload = () => {
+      const config = new VKIDSDK.Config({
+        clientId: 53336238,
+        redirectUri: 'https://arive123e.github.io/vk-auth-pages/callback.html',
+      });
+      const widget = new VKIDSDK.Widget(config);
+      widget.mount('vkid-auth');
+    };
+    sdk.onerror = () => {
+      console.error('Не удалось загрузить VK ID SDK');
+    };
+    document.head.appendChild(sdk);
   </script>
 </body>
 </html>
+
